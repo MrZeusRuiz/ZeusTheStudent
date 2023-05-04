@@ -53,9 +53,10 @@
 			background: #34495e;
 			height: 100%;
 			width: 100%;
-			/*overflow: auto;
+			overflow: auto;
 			overflow-y: hidden;
-			overflow-x: scroll;*/
+			overflow-x: scroll;
+			position: relative;
 		}
 		.info-wrapper {
 			width: 95%;
@@ -86,8 +87,31 @@
 		::-webkit-scrollbar-thumb {
 			background: #c0c0c0;
 		}
+		/* SCROLL INDICATOR */
+		.scroll-indicator {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 8px;
+			background: rgba(192, 192, 192, 0.5);
+			opacity: 0;
+			transition: opacity 0.2s;
+			z-index: 1;
+		}
+		.info-section:hover .scroll-indicator {
+			opacity: 1;
+		}
+		.info-section::-webkit-scrollbar-thumb:hover {
+			background: #a0a0a0;
+		}
+		.info-section::-webkit-scrollbar-thumb:active {
+			background: #808080;
+		}
 	</style>
 </head>
+	
+	
 <body id="skrollr-body">
 	<div class="container">
 		<nav>
