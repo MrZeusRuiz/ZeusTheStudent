@@ -2,107 +2,97 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>My Website</title>
-	<!-- CSS -->
+	<title>My Gallery</title>
 	<style>
 		body {
 			margin: 0;
 			padding: 0;
-			overflow-x: hidden;
 		}
-		nav {
-			position: fixed;
-			overflow: hidden;
-			top: -97%;
-			width: 100%;
-			height: 100%;
-			background: #e74c3c;
-			transition: all 0.5s;
-		}
-		nav ul li {
-			cursor: pointer;
-			height: 150px;
-			width: 150px;
-			background: #1abc9c;
-			margin: 20px;
-			float: left;
-		}
-		.picture-container {
+		.gallery {
 			position: relative;
+			width: 100vw;
 			height: 100vh;
-			width: 100%;
+			overflow-x: scroll;
+			scroll-snap-type: x mandatory;
+			scroll-behavior: smooth;
 		}
-		.picture {
+		.gallery::-webkit-scrollbar {
+			display: none;
+		}
+		.slide {
+			position: relative;
+			width: 100vw;
+			height: 100vh;
+			scroll-snap-align: start;
+		}
+		.slide .image {
 			position: absolute;
 			top: 0;
-			bottom: 0;
 			left: 0;
-			right: 0;
-			background-size: cover;
+			width: 100%;
+			height: 100%;
+			background-position: center center;
 			background-repeat: no-repeat;
-			background-position: center;
-			transition: opacity 0.5s;
+			background-size: cover;
 		}
-		.picture.active {
-			opacity: 1;
-		}
-		.picture.inactive {
-			opacity: 0;
-			pointer-events: none;
-		}
-		.picture-nav {
-			position: absolute;
+		.button {
+			position: fixed;
 			top: 50%;
 			transform: translateY(-50%);
+			width: 40px;
+			height: 40px;
+			background: rgba(255, 255, 255, 0.5);
+			border-radius: 50%;
 			z-index: 1;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			width: 100%;
-			padding: 0 10%;
-		}
-		.picture-nav button {
-			background: none;
-			border: none;
-			color: white;
-			font-size: 24px;
 			cursor: pointer;
-			opacity: 0.5;
-			transition: opacity 0.3s;
 		}
-		.picture-nav button:hover {
-			opacity: 1;
+		.button:hover {
+			background: rgba(255, 255, 255, 0.8);
+		}
+		.button.left {
+			left: 20px;
+			background-image: url("https://cdn-icons-png.flaticon.com/512/271/271228.png");
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 24px 24px;
+		}
+		.button.right {
+			right: 20px;
+			background-image: url("https://cdn-icons-png.flaticon.com/512/271/271220.png");
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: 24px 24px;
 		}
 	</style>
 </head>
-<body id="skrollr-body">
-	<div class="container">
-		<nav>
-			<ul>
-				<li id="nav-1">1</li>
-				<li id="nav-2">2</li>
-				<li id="nav-3">3</li>
-			</ul>
-		</nav>
-		<div class="picture-container">
-			<div class="picture picture1 active" style="background-image: url(https://i.imgur.com/hAisNHb.jpg);"></div>
-			<div class="picture picture2 inactive" style="background-image: url(https://i.imgur.com/QlrIHln.jpg);"></div>
-			<div class="picture picture3 inactive" style="background-image: url(https://i.imgur.com/IGLzzUs.jpg);"></div>
-			<div class="picture-nav">
-				<button id="prev-btn">&#10094;</button>
-				<button id="next-btn">&#10095;</button>
-			</div>
+<body>
+	<div class="gallery">
+		<div class="slide">
+			<div class="image" style="background-image: url(https://i.imgur.com/hAisNHb.jpg);"></div>
+		</div>
+		<div class="slide">
+			<div class="image" style="background-image: url(https://i.imgur.com/QlrIHln.jpg);"></div>
+		</div>
+		<div class="slide">
+			<div class="image" style="background-image: url(https://i.imgur.com/IGLzzUs.jpg);"></div>
 		</div>
 	</div>
-
-	<!-- JavaScript -->
+	<div class="button left" onclick="scrollGallery(-1);"></div>
+	<div class="button right" onclick="scrollGallery(1);"></div>
 	<script>
-		const pictures = document.querySelectorAll('.picture');
-		const navBtns = document.querySelectorAll('nav li');
-		const prevBtn = document.getElementById('prev-btn');
-		const nextBtn = document.getElementById('next-btn');
-
-		let currentPicture = 0;
-
-		// Set the first picture to active
-		pictures[currentPicture].classList.add('active
+		function scrollGallery(direction) {
+			const gallery = document.querySelector(".gallery");
+			const slides = document.querySelectorAll(".slide");
+			const currentSlide = gallery.scrollLeft / window.innerWidth;
+			const targetSlide = currentSlide + direction;
+			if (targetSlide < 0 || targetSlide >= slides.length) {
+				return;
+			}
+			gallery.scrollTo({
+				left: targetSlide * window.innerWidth,
+				behavior: "smooth"
+			});
+		}
+	</script>
+</body>
+</html>
