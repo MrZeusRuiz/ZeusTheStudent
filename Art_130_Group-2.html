@@ -3,10 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>My Website</title>
+	<!-- CSS -->
 	<style>
 		body {
 			margin: 0;
 			padding: 0;
+			overflow-x: hidden;
 		}
 		nav {
 			position: fixed;
@@ -25,94 +27,51 @@
 			margin: 20px;
 			float: left;
 		}
-		.picture {
+		.picture-container {
+			position: relative;
 			height: 100vh;
 			width: 100%;
-			overflow: hidden;
-			position: relative;
 		}
-		.picture .bkg {
-			height: 100%;
-			width: 100%;
-			background-position: center center;
-			background-size: cover;
+		.picture {
 			position: absolute;
 			top: 0;
+			bottom: 0;
 			left: 0;
-			opacity: 0;
-			transition: opacity 0.5s ease-in-out;
+			right: 0;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			transition: opacity 0.5s;
 		}
-		.picture.active .bkg {
+		.picture.active {
 			opacity: 1;
 		}
-		.info-section {
-			background: #34495e;
-			height: calc(100vh - 150px);
-			width: 100%;
-			display: flex;
-			overflow: hidden;
+		.picture.inactive {
+			opacity: 0;
+			pointer-events: none;
 		}
-		.info-wrapper {
-			width: 95%;
-			padding: 2.5%;
-			display: flex;
-			overflow-x: auto;
-			scroll-behavior: smooth;
-		}
-		.info-section p {
-			color: white;
-			font-size: 24px;
-			font-family: Helvetica, sans-serif;
-		}
-		.info {
-			width: 300px;
-			height: 188px;
-			margin-right: 20px;
-			flex-shrink: 0;
-		}
-		/* Scroll buttons */
-		.scroll-button {
-			position: fixed;
+		.picture-nav {
+			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			width: 50px;
-			height: 50px;
-			background: #1abc9c;
+			z-index: 1;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			padding: 0 10%;
+		}
+		.picture-nav button {
+			background: none;
 			border: none;
-			border-radius: 50%;
-			outline: none;
 			color: white;
 			font-size: 24px;
 			cursor: pointer;
-			opacity: 0;
-			transition: opacity 0.5s ease-in-out;
-			z-index: 1;
+			opacity: 0.5;
+			transition: opacity 0.3s;
 		}
-		.scroll-button.up {
-			left: 50%;
-			transform: translate(-50%, -50%) rotate(-90deg);
-		}
-		.scroll-button.down {
-			left: 50%;
-			transform: translate(-50%, -50%) rotate(90deg);
-		}
-		.scroll-button:hover {
-			background: #16a085;
-		}
-		/* Disable hover on scroll for performance */
-		.disable-hover {
-			pointer-events: none;
-		}
-		/* Custom scrollbar */
-		::-webkit-scrollbar {
-			width: 8px;
-			height: 16px;
-		}
-		::-webkit-scrollbar-track {
-			background: white;
-		}
-		::-webkit-scrollbar-thumb {
-			background: #c0c0c0;
+		.picture-nav button:hover {
+			opacity: 1;
 		}
 	</style>
 </head>
@@ -120,4 +79,30 @@
 	<div class="container">
 		<nav>
 			<ul>
-				<li>
+				<li id="nav-1">1</li>
+				<li id="nav-2">2</li>
+				<li id="nav-3">3</li>
+			</ul>
+		</nav>
+		<div class="picture-container">
+			<div class="picture picture1 active" style="background-image: url(https://i.imgur.com/hAisNHb.jpg);"></div>
+			<div class="picture picture2 inactive" style="background-image: url(https://i.imgur.com/QlrIHln.jpg);"></div>
+			<div class="picture picture3 inactive" style="background-image: url(https://i.imgur.com/IGLzzUs.jpg);"></div>
+			<div class="picture-nav">
+				<button id="prev-btn">&#10094;</button>
+				<button id="next-btn">&#10095;</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- JavaScript -->
+	<script>
+		const pictures = document.querySelectorAll('.picture');
+		const navBtns = document.querySelectorAll('nav li');
+		const prevBtn = document.getElementById('prev-btn');
+		const nextBtn = document.getElementById('next-btn');
+
+		let currentPicture = 0;
+
+		// Set the first picture to active
+		pictures[currentPicture].classList.add('active
