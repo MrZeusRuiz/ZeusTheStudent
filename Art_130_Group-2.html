@@ -22,7 +22,7 @@
   #loader img {
     width: 100px;
     height: 100px;
-    animation: spin 1s linear infinite;
+    animation: spin 3s linear infinite;
   }
   
   @keyframes spin {
@@ -110,7 +110,7 @@
 
 <body>
   <div id="loader">
-  <img src="loading.gif" alt="Loading...">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/SVG_animated_loading_icon.svg" alt="Loading...">
 </div>
 
   <div class="gallery">
@@ -127,7 +127,7 @@ Albuquerque, New Mexico, May 31, 2020
       </div>
     </div>
     <!--div class="slide" style="background-image: url(https://i.imgur.com/QlrIHln.jpg);"-->
-    <div class="slide active" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_58_1920.jpg);">
+    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_58_1920.jpg);">
 
       <div class="text">
         Caring for Unsheltered Relatives
@@ -138,7 +138,7 @@ Gallup, New Mexico, March 13, 2020
       </div>
     </div>
     <!--div class="slide" style="background-image: url(https://i.imgur.com/IGLzzUs.jpg);"-->
-    <div class="slide active" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_258_1920.jpg);">
+    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_258_1920.jpg);">
 
       <div class="text">
         Shutting Down a Church Revival Meeting
@@ -156,10 +156,11 @@ Gallup, New Mexico, June 26, 2020
 
   <script>
     window.addEventListener("load", function() {
-  const loader = document.getElementById("loader");
-  loader.style.display = "none";
+ const loader = document.getElementById("loader");
+  setTimeout(function() {
+    loader.style.display = "none";
+  }, 5000);
 });
-    
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     prevBtn.addEventListener('click', () => {
