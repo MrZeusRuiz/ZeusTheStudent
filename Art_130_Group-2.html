@@ -1,58 +1,113 @@
-<!DOCTYPE html>
-<html>
 <head>
 	<meta charset="UTF-8">
-	<title>Scrolling Gallery</title>
+	<title>My Gallery</title>
+	<!-- CSS -->
 	<style>
 		body {
 			margin: 0;
 			padding: 0;
-			height: 100%;
 		}
-
 		.gallery {
-			display: flex;
-			overflow-x: scroll;
-			overflow-y: hidden;
-			scroll-snap-type: x mandatory;
-			scroll-behavior: smooth;
-			width: 100%;
-			height: 100%;
+			height: 100vh;
+			overflow: hidden;
+			position: relative;
 		}
-
-		.gallery::-webkit-scrollbar {
-			display: none;
-		}
-
 		.picture {
-			flex: 0 0 auto;
-			min-width: 100%;
 			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
-			background-attachment: fixed;
-			background-size: cover;
-			scroll-snap-align: center;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
 		}
-
-		.picture1 {
-			background-image: url(https://i.imgur.com/hAisNHb.jpg);
+		.active {
+			opacity: 1;
 		}
-
-		.picture2 {
-			background-image: url(https://i.imgur.com/QlrIHln.jpg);
+		.scroll-button {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background-color: rgba(0,0,0,0.5);
+			color: #fff;
+			font-size: 24px;
+			padding: 10px;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+			z-index: 1;
 		}
-
-		.picture3 {
-			background-image: url(https://i.imgur.com/IGLzzUs.jpg);
+		.scroll-button:hover {
+			background-color: rgba(0,0,0,0.8);
+		}
+		.scroll-button.left {
+			left: 0;
+		}
+		.scroll-button.right {
+			right: 0;
 		}
 	</style>
 </head>
 <body>
 	<div class="gallery">
-		<div class="picture picture1"></div>
-		<div class="picture picture2"></div>
-		<div class="picture picture3"></div>
+		<div class="picture active" style="background-image: url(https://i.imgur.com/hAisNHb.jpg)"></div>
+		<div class="picture" style="background-image: url(https://i.imgur.com/QlrIHln.jpg)"></div>
+		<div class="picture" style="background-image: url(https://i.imgur.com/IGLzzUs.jpg)"></div>
+		<div class="scroll-button left">&lt;</div>
+		<div class="scroll-button right">&gt;</div>
 	</div>
+
+	<!-- JavaScript -->
+	<script>
+		const gallery = document.querySelector('.gallery');
+		const pictures = document.querySelectorAll('.picture');
+		const leftButton = document.querySelector('.scroll-button.left');
+		const rightButton = document.querySelector('.scroll-button.right');
+
+		let activeIndex = 0;
+		let timer = null;
+
+		function scrollLeft() {
+			clearInterval(timer);
+			timer = setInterval(() => {
+				activeIndex--;
+				if (activeIndex < 0) {
+					activeIndex = pictures.length - 1;
+				}
+				updateActivePicture();
+			}, 5000);
+			activeIndex--;
+			if (activeIndex < 0) {
+				activeIndex = pictures.length - 1;
+			}
+			updateActivePicture();
+		}
+
+		function scrollRight() {
+			clearInterval(timer);
+			timer = setInterval(() => {
+				activeIndex++;
+				if (activeIndex >= pictures.length) {
+					activeIndex = 0;
+				}
+				updateActivePicture();
+			}, 5000);
+			activeIndex++;
+			if (activeIndex >= pictures.length) {
+				activeIndex = 0;
+			}
+			updateActivePicture();
+		}
+
+		function updateActivePicture() {
+			pictures.forEach(picture => picture.classList.remove('active'));
+			pictures[activeIndex].classList.add('active');
+		}
+
+		leftButton.addEventListener('click', scrollLeft);
+		rightButton.addEventListener('click', scrollRight);
+
+		timer = setInterval(scrollRight, 5000);
+	</script>
 </body>
-</html>
