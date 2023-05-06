@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>ART_130_GROUP-2</title>
   <!-- CSS -->
   <style>
-     #loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  
-  #loader img {
-    width: 100px;
-    height: 100px;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
     }
-    100% {
-      transform: rotate(-360deg);
+
+    #loader img {
+      width: 100px;
+      height: 100px;
+      animation: spin 1s linear infinite;
     }
-  }
-    
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -78,7 +77,6 @@
       text-align: center;
       opacity: 0;
       transition: opacity 4s 1.5s, visibility 0s 1s;
-      
     }
 
     .gallery .slide.active .text {
@@ -110,62 +108,85 @@
 
 <body>
   <div id="loader">
-  <img src="https://raw.githubusercontent.com/MrZeusRuiz/ZeusTheStudent/main/THUNDER.png" alt="Loading...">
-</div>
-
+    <img src="https://raw.githubusercontent.com/MrZeusRuiz/ZeusTheStudent/main/THUNDER.png" alt="Loading...">
+  </div>
 
   <div class="gallery">
-
-    
     <div class="slide active" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_168_1920.jpg);">
-
       <div class="text">
-        Black Lives Matter Protest
-Albuquerque, New Mexico, May 31, 2020
+        Black Lives Matter Protest<br>
+        Albuquerque, New Mexico, May 31, 2020<br>
         Photo © Donovan Quintero, 2020
-        
-        
-      </div>
-    </div> 
-    
-    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_58_1920.jpg);">
-
-      <div class="text">
-        Caring for Unsheltered Relatives
-Gallup, New Mexico, March 13, 2020
-        Photo © Donovan Quintero, 2020
-        
-        
       </div>
     </div>
-   
-    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_258_1920.jpg);">
 
+    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_58_1920.jpg);">
       <div class="text">
-        Shutting Down a Church Revival Meeting
-Gallup, New Mexico, June 26, 2020
+        Caring for Unsheltered Relatives<br>
+        Gallup, New Mexico, March 
+              13, 2020<br>
         Photo © Donovan Quintero, 2020
-        
       </div>
-            </div>
-    
-  <div class="slide"><iframe src="https://www.markermusic.com/" width="100%" height="100%" frameborder="0"></iframe></div>   
-  <div class="slide"><iframe src="https://www.inbflat.net/" width="100%" height="100%" frameborder="0"></iframe></div>      
-      
-</div>
+    </div>
+
+    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_258_1920.jpg);">
+      <div class="text">
+        Shutting Down a Church Revival Meeting<br>
+        Gallup, New Mexico, June 26, 2020<br>
+        Photo © Donovan Quintero, 2020
+      </div>
+    </div>
+
+    <div class="slide">
+      <iframe src="https://www.markermusic.com/" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <div class="slide">
+      <iframe src="https://www.inbflat.net/" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </div>
 
   <button id="prevBtn">◀</button>
   <button id="nextBtn">▶</button>
 
   <script>
-    
-     window.addEventListener("load", function() {
- const loader = document.getElementById("loader");
-  setTimeout(function() {
-    loader.style.display = "none";
-  }, 0);
-});
-     
+    window.addEventListener("load", function() {
+      const loader = document.getElementById("loader");
+      setTimeout(function() {
+        loader.style.display = "none";
+      }, 2000);
+    });
+
+    // Lazy load images and iframes
+    const gallery = document.querySelector('.gallery');
+    const slides = gallery.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function lazyLoadImage(slide) {
+      const backgroundUrl = slide.getAttribute('data-background');
+      if (backgroundUrl) {
+        slide.style.backgroundImage = `url(${backgroundUrl})`;
+      }
+    }
+
+    function lazyLoadIframe(slide) {
+      const iframeSrc = slide.getAttribute('data-src');
+      if (iframeSrc) {
+        const iframe = document.createElement('iframe');
+        iframe.src = iframeSrc;
+        iframe.width = '100%';
+        iframe.height = '100%';
+        iframe.frameBorder = '0';
+        slide.appendChild(iframe);
+      }
+    }
+
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      slides[n].classList.add('active');
+      currentSlide = n;
+    }
+
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     prevBtn.addEventListener('click', () => {
@@ -178,15 +199,6 @@ Gallup, New Mexico, June 26, 2020
         showSlide(currentSlide + 1);
       }
     });
-    const gallery = document.querySelector('.gallery');
-    const slides = gallery.querySelectorAll('.slide');
-    let currentSlide = 0;
-
-    function showSlide(n) {
-      slides[currentSlide].classList.remove('active');
-      slides[n].classList.add('active');
-      currentSlide = n;
-    }
 
     function scrollHandler(e) {
       if (e.deltaY > 0 && currentSlide < slides.length - 1) {
@@ -197,3 +209,5 @@ Gallup, New Mexico, June 26, 2020
     }
     gallery.addEventListener('wheel', scrollHandler);
   </script>
+</body>
+</html>
