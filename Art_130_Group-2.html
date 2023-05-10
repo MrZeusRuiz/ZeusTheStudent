@@ -5,33 +5,7 @@
   <title>ART_130_GROUP-2</title>
   <!-- CSS -->
   <style>
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    #loader img {
-      width: 100px;
-      height: 100px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(-360deg);
-      }
-    }
+ 
 
     body {
       margin: 0;
@@ -107,25 +81,22 @@
 </head>
 
 <body>
-  <div id="loader">
-    <img src="https://raw.githubusercontent.com/MrZeusRuiz/ZeusTheStudent/main/THUNDER.png" alt="Loading...">
-  </div>
+ 
 
   <div class="gallery">
-    <div class="slide active" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_168_1920.jpg);">
+    <div class="slide active" style="https://images.squarespace-cdn.com/content/v1/5f4cfa688eeb777ec584dede/1599152348642-5975HGZP52U11HFJB23E/L1002455.jpg?format=1500w);">
       <div class="text">
-        Black Lives Matter Protest<br>
-        Albuquerque, New Mexico, May 31, 2020<br>
-        Photo © Donovan Quintero, 2020
+        CAMILLE SEAMAN <br>
+        Cannonball, ND, October 27, 2016.<br>
+        WE ARE STILL HERE : A NATIVE AMERICAN PORTRAIT PROJECT<br>
       </div>
     </div>
 
-    <div class="slide" style="background-image: url(https://americanindian.si.edu/developingstories/images/DQ_58_1920.jpg);">
+    <div class="slide" style="background-image: url(https://images.squarespace-cdn.com/content/v1/5f4cfa688eeb777ec584dede/1599152521379-8LC66ZVDPU3WT2S59CWR/L1002596.jpg?format=1500w);">
       <div class="text">
-        Caring for Unsheltered Relatives<br>
-        Gallup, New Mexico, March 
-              13, 2020<br>
-        Photo © Donovan Quintero, 2020
+       CAMILLE SEAMAN <br>
+         Crow Agency, MT, August 25, 2016.<br>
+        WE ARE STILL HERE : A NATIVE AMERICAN PORTRAIT PROJECT<br>
       </div>
     </div>
 
@@ -151,12 +122,7 @@
   
 </body>
   <script>
-    window.addEventListener("load", function() {
-      const loader = document.getElementById("loader");
-      setTimeout(function() {
-        loader.style.display = "none";
-      }, 2000);
-    });
+ 
 
     // Lazy load images and iframes
     const gallery = document.querySelector('.gallery');
