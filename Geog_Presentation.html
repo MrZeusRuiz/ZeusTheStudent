@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Embed with Cited Works</title>
+    <title>Thanks Professor, u da best</title>
     <style>
         html, body {
             height: 100%;
@@ -23,24 +23,38 @@
             text-align: center;
         }
         
-        h1, h2, p, ul {
+        h1, h2, p {
             margin: 0;
             padding: 0;
         }
         
-        iframe {
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
+        .video-container {
             position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
         }
         
-        iframe iframe {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+        }
+        
+        .citation {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .citation p {
+            margin: 0;
+        }
+        
+        .citation .link {
+            font-style: italic;
+            color: blue;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -52,14 +66,40 @@
         </div>
         
         <h2>Description</h2>
-        <p>This is a description of the video.</p>
+        <p>WARNING, This video includes strong language, violence, death, and other potential triggers</p>
         
         <h2>Cited Works</h2>
-        <ul>
-            <li>Author 1, "Title of Work 1," Journal/Website, Year</li>
-            <li>Author 2, "Title of Work 2," Journal/Website, Year</li>
-            <li>Author 3, "Title of Work 3," Journal/Website, Year</li>
-        </ul>
+        
+        <div class="citation">
+            <p class="author">Cavari, Amnon, et al.</p>
+            <p class="title">“Foreign News on US Media: A Longitudinal Analysis of News Coverage of Israel.”</p>
+            <p class="publication-details">Israel Studies, vol. 22, no. 1, 2017, p. 24.</p>
+            <p class="link"><a href="https://doi.org/10.2979/israelstudies.22.1.02">https://doi.org/10.2979/israelstudies.22.1.02</a></p>
+        </div>
+        
+        <div class="citation">
+            <p class="author">Joyella, Mark</p>
+            <p class="title">“Fox News Hits 23rd Consecutive Month as Most-Watched in Cable News as CNN Sees Gains in January.”</p>
+            <p class="publication-details">Forbes, 2 Feb. 2023.</p>
+            <p class="link"><a href="https://www.forbes.com/sites/markjoyella/2023/02/01/fox-news-hits-23rd-consecutive-month-as-most-watched-in-cable-news-as-cnn-sees-gains-in-january/">https://www.forbes.com/sites/markjoyella/2023/02/01/fox-news-hits-23rd-consecutive-month-as-most-watched-in-cable-news-as-cnn-sees-gains-in-january/</a></p>
+        </div>
+        
+        <div class="citation">
+            <p class="title">"Zionism."</p>
+            <p class="publication-details">Britannica, Encyclopædia Britannica, Inc., 9 July 2020.</p>
+            <p class="link"><a href="https://www.britannica.com/topic/Zionism">https://www.britannica.com/topic/Zionism</a></p>
+        </div>
+        
+        <div class="citation">
+            <p class="title">"Israel Country Profile."</p>
+            <p class="publication-details">BBC News, 14 Feb. 2023.</p>
+            <p class="link"><a href="https://www.bbc.com/news/world-middle-east-14628835">https://www.bbc.com/news/world-middle-east-14628835</a></p>
+        </div>
+        
+        <div class="citation">
+            <p class="title">"Creation of Israel."</p>
+            <p class="publication-details">Office of the Historian, Bureau of Public Affairs, United States Department of State, <a href="https://history.state.gov/milestones/1945-1952/creation-israel#:~:text=On%20May%2014%2C%201948%2C%20David,nation%20on%20the%20same%20day">https://history.state.gov/milestones/1945-1952/creation-israel#:~:text=On%20May%2014%2C%201948%2C%20David,nation%20on%20the%20same%20day</a>.</p>
+        </div>
     </div>
 </body>
 </html>
