@@ -10,20 +10,17 @@
         }
         
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: black;
-            color: white;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333333;
+            transition: background-color 0.5s ease-in-out;
         }
         
         .container {
-            max-width: 80%;
-            width: 100%;
-            box-sizing: border-box;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
-            overflow: auto;
         }
         
         h1, h2, p {
@@ -31,10 +28,25 @@
             padding: 0;
         }
         
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio for responsive video */
+            padding-bottom: 56.25%; 
             margin-bottom: 20px;
         }
         
@@ -47,8 +59,8 @@
         }
         
         .citation {
-            margin-bottom: 20px;
             text-align: left;
+            margin-bottom: 20px;
         }
         
         .citation p {
@@ -60,18 +72,37 @@
             color: blue;
             text-decoration: underline;
         }
+        
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            h2 {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            
+            p {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Israel | Palestine</h1>
         
-        <h2>WARNING, This video includes strong language, violence, death, and other potential triggers</h2>
-        <br><p>
+        <h2>WARNING: This video includes strong language, violence, death, and other potential triggers</h2>
         
-        <br><br><br>
         <div class="citation">
-          <p class="author"><br> <p><h1>Cited Works</h1></p><br>Cavari, Amnon, et al.</p>
+            <p class="author">Cavari, Amnon, et al.</p>
             <p class="title">“Foreign News on US Media: A Longitudinal Analysis of News Coverage of Israel.”</p>
             <p class="publication-details">Israel Studies, vol. 22, no. 1, 2017, p. 24.</p>
             <p class="link"><a href="https://doi.org/10.2979/israelstudies.22.1.02">https://doi.org/10.2979/israelstudies.22.1.02</a></p>
@@ -109,9 +140,28 @@
         </div>
         
         <h2>Palestine | Israel</h2>
+        
         <div class="video-container">
             <iframe src="https://www.youtube.com/embed/AoziDAHpSFE" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var bodyHeight = document.body.offsetHeight;
+            var windowHeight = window.innerHeight;
+            var scrollPosition = window.pageYOffset;
+            var fadeStart = 0.8;
+            var fadeEnd = 0.9;
+            var fadeRange = fadeEnd - fadeStart;
+            
+            if (scrollPosition > (bodyHeight - windowHeight * fadeEnd)) {
+                var percentage = 1 - ((bodyHeight - scrollPosition - windowHeight * fadeStart) / (windowHeight * fadeRange));
+                document.body.style.backgroundColor = 'rgba(0, 0, 0, ' + percentage + ')';
+            } else {
+                document.body.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            }
+        });
+    </script>
 </body>
 </html>
