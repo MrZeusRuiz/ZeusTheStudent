@@ -6,140 +6,91 @@
     <title>Meal of the Day</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f5f5f5;
         }
-
-        #meal-display {
+        #mealDisplay {
             font-size: 24px;
             margin-bottom: 20px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        #select-button {
+        #btnSelectMeal {
             padding: 15px 30px;
             font-size: 18px;
             cursor: pointer;
-            background-color: #3498db;
+            background-color: #ff69b4;
             color: #fff;
             border: none;
             border-radius: 25px;
-            outline: none;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease;
         }
-
-        #select-button:hover {
-            background-color: #2980b9;
-        }
-
-        .disabled {
-            background-color: #7f8c8d;
-            cursor: not-allowed;
+        #btnSelectMeal:hover {
+            background-color: #ff4388;
         }
     </style>
 </head>
 <body>
 
-<div id="meal-display">Click the button to see today's meal!</div>
-<button id="select-button" onclick="selectMeal()">Select Today's Meal</button>
+<h1>Meal of the Day</h1>
+
+<div id="mealDisplay">Loading...</div>
+<button id="btnSelectMeal" onclick="selectMeal()">Select Meal</button>
 
 <script>
+    // Initialize variables
+    let meals = [
+        "Tacos", "Tomatadas", "Spam and rice", "Sopita", "Pozole",
+        "Spicy chipotle burger", "Garbanzos with rice", "Papas and caldillo",
+        "Bistec en caldillo", "Lentejas con pica salchicha and spinach", "Mole",
+        "Carne asada con rice", "Chipotle chicken", "Rotisserie chicken from costco or safeway",
+        "Pikadillo", "Flat breaded chicken", "Orange chicken", "Compow chicken",
+        "Chow mein", "Albondigas de carne", "Kobe beef", "Pica pollo hot wings", "Sandwiches"
+    ];
+
+    let selectedMeal = localStorage.getItem('selectedMeal');
+    let clickCount = parseInt(localStorage.getItem('clickCount')) || 0;
+    let lastClickedDate = localStorage.getItem('lastClickedDate');
+
+    // Function to select a meal
     function selectMeal() {
-        const meals = shuffle([
-            "Tacos", "Tomatadas", "Spam and rice", "Sopita", "Pozole", "Spicy chipotle burger",
-            "Garbanzos with rice", "Papas and caldillo", "Bistec en caldillo", 
-            "Lentejas con pica salchicha and spinach", "Mole", "Carne asada con rice",
-            "Chipotle chicken", "Rotisserie chicken from costco or safeway", "Pikadillo",
-            "Flat breaded chicken", "Orange chicken", "Compow chicken", "Chow mein",
-            "Albondigas de carne", "Kobe beef", "Pica pollo hot wings", "Sandwiches"
-        ]);
-
-        const selectedMeal = meals.pop();
-        const visitorId = getVisitorId();
-        const clickCount = parseInt(localStorage.getItem(`clickCount-${visitorId}`)) || 0;
-
-        // Check if the click limit has been reached
-        const clickLimit = 2;
-
-        if (clickCount >= clickLimit) {
-            alert(`You have reached the limit of ${clickLimit} clicks for today!`);
-            document.getElementById('select-button').classList.add('disabled');
+        if (clickCount >= 2) {
+            alert("You've reached the daily limit of meal selections. Come back tomorrow.");
             return;
         }
 
-        // Increment the click count
-        localStorage.setItem(`clickCount-${visitorId}`, clickCount + 1);
+        let remainingMeals = meals.filter(meal => meal !== selectedMeal);
 
-        const lastMeal = localStorage.getItem(`lastMeal-${visitorId}`);
-
-        // Check if the last meal is the same as the current selection
-        if (lastMeal === selectedMeal) {
-            // If it is, reselect a new meal
-            selectMeal();
+        if (remainingMeals.length === 0) {
+            alert("You've tried all the meals! Come back tomorrow.");
             return;
         }
 
-        // Display the selected meal with a fade-in effect
-        const mealDisplay = document.getElementById('meal-display');
-        mealDisplay.style.opacity = 0;
-        setTimeout(() => {
-            mealDisplay.innerText = `Today's Meal: ${selectedMeal}`;
-            mealDisplay.style.opacity = 1;
-        }, 500); // Set a timeout to wait for the fade-out effect to complete
+        // Randomly select a new meal
+        let randomIndex = Math.floor(Math.random() * remainingMeals.length);
+        selectedMeal = remainingMeals[randomIndex];
 
-        // Save the selected meal to local storage
-        localStorage.setItem(`lastMeal-${visitorId}`, selectedMeal);
+        // Update the display
+        document.getElementById('mealDisplay').innerText = `Meal of the Day: ${selectedMeal}`;
 
-        // Disable the button after the second click
-        if (clickCount >= clickLimit - 1) {
-            document.getElementById('select-button').classList.add('disabled');
-        }
+        // Save selected meal to local storage
+        localStorage.setItem('selectedMeal', selectedMeal);
+
+        // Update click count and last clicked date
+        clickCount++;
+        localStorage.setItem('clickCount', clickCount.toString());
+        localStorage.setItem('lastClickedDate', new Date().toLocaleDateString());
     }
 
-    function shuffle(array) {
-        let currentIndex = array.length, randomIndex;
-
-        // While there remain elements to shuffle...
-        while (currentIndex !== 0) {
-
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-        }
-
-        return array;
-    }
-
-    function getVisitorId() {
-        // Use a simple approach to generate a unique identifier for the visitor
-        const date = new Date().toISOString();
-        return date.replace(/\D/g, ''); // Remove non-numeric characters
-    }
-
-    // Display the last meal on page load
-    const visitorId = getVisitorId();
-    const lastMeal = localStorage.getItem(`lastMeal-${visitorId}`);
-    if (lastMeal) {
-        const mealDisplay = document.getElementById('meal-display');
-        mealDisplay.innerText = `Today's Meal: ${lastMeal}`;
-        mealDisplay.style.opacity = 1;
-
-        // Disable the button if the click limit is reached
-        const clickCount = parseInt(localStorage.getItem(`clickCount-${visitorId}`)) || 0;
-        const clickLimit = 2;
-
-        if (clickCount >= clickLimit) {
-            document.getElementById('select-button').classList.add('disabled');
-        }
+    // Display the last selected meal
+    if (selectedMeal) {
+        document.getElementById('mealDisplay').innerText = `Meal of the Day: ${selectedMeal}`;
+    } else {
+        selectMeal(); // If no meal is selected, choose one
     }
 </script>
 
