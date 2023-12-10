@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal of the Day</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #meal-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #select-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #select-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<div id="meal-display">Click the button to see today's meal!</div>
+<button id="select-button" onclick="selectMeal()">Select Today's Meal</button>
+
+<script>
+    function selectMeal() {
+        const meals = [
+            "Tacos", "Tomatadas", "Spam and rice", "Sopita", "Pozole", "Spicy chipotle burger",
+            "Garbanzos with rice", "Papas and caldillo", "Bistec en caldillo", 
+            "Lentejas con pica salchicha and spinach", "Mole", "Carne asada con rice",
+            "Chipotle chicken", "Rotisserie chicken from costco or safeway", "Pikadillo",
+            "Flat breaded chicken", "Orange chicken", "Compow chicken", "Chow mein",
+            "Albondigas de carne", "Kobe beef", "Pica pollo hot wings", "Sandwiches"
+        ];
+
+        const selectedMeal = getRandomMeal(meals);
+        const lastClickData = JSON.parse(localStorage.getItem('lastClickData')) || {};
+
+        // Check if the click limit has been reached
+        const today = new Date().toLocaleDateString();
+        const clickLimit = 2;
+
+        if (lastClickData[today] && lastClickData[today] >= clickLimit) {
+            alert(`You have reached the limit of ${clickLimit} clicks for today!`);
+            return;
+        }
+
+        const lastMeal = localStorage.getItem('lastMeal');
+
+        // Check if the last meal is the same as the current selection
+        if (lastMeal === selectedMeal) {
+            // If it is, reselect a new meal
+            selectMeal();
+            return;
+        }
+
+        // Update the click count for today
+        lastClickData[today] = (lastClickData[today] || 0) + 1;
+        localStorage.setItem('lastClickData', JSON.stringify(lastClickData));
+
+        // Display the selected meal with a fade-in effect
+        const mealDisplay = document.getElementById('meal-display');
+        mealDisplay.style.opacity = 0;
+        setTimeout(() => {
+            mealDisplay.innerText = `Today's Meal: ${selectedMeal}`;
+            mealDisplay.style.opacity = 1;
+        }, 500); // Set a timeout to wait for the fade-out effect to complete
+
+        // Save the selected meal to local storage
+        localStorage.setItem('lastMeal', selectedMeal);
+    }
+
+    function getRandomMeal(meals) {
+        const randomIndex = Math.floor(Math.random() * meals.length);
+        return meals[randomIndex];
+    }
+</script>
+
+</body>
+</html>
