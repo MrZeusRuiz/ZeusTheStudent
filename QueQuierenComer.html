@@ -46,16 +46,16 @@
 
 <script>
     function selectMeal() {
-        const meals = [
+        const meals = shuffle([
             "Tacos", "Tomatadas", "Spam and rice", "Sopita", "Pozole", "Spicy chipotle burger",
             "Garbanzos with rice", "Papas and caldillo", "Bistec en caldillo", 
             "Lentejas con pica salchicha and spinach", "Mole", "Carne asada con rice",
             "Chipotle chicken", "Rotisserie chicken from costco or safeway", "Pikadillo",
             "Flat breaded chicken", "Orange chicken", "Compow chicken", "Chow mein",
             "Albondigas de carne", "Kobe beef", "Pica pollo hot wings", "Sandwiches"
-        ];
+        ]);
 
-        const selectedMeal = getRandomMeal(meals);
+        const selectedMeal = meals.pop();
         const lastClickData = JSON.parse(localStorage.getItem('lastClickData')) || {};
 
         // Check if the click limit has been reached
@@ -92,9 +92,21 @@
         localStorage.setItem('lastMeal', selectedMeal);
     }
 
-    function getRandomMeal(meals) {
-        const randomIndex = Math.floor(Math.random() * meals.length);
-        return meals[randomIndex];
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (currentIndex !== 0) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+
+        return array;
     }
 </script>
 
