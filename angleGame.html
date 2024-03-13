@@ -62,6 +62,13 @@
   <canvas id="canvas" width="600" height="600" />
 </body>
 <script>
+  window.onload = function() {
+    // Get the height of the content inside the iframe
+    var contentHeight = document.body.scrollHeight;
+    
+    // Set the height of the iframe to match the content height
+    parent.document.getElementById('angleGameContainer').style.height = contentHeight + 'px';
+};
   var Answer = Math.floor(Math.random() * 360);
   var AngleGuessed = 0;
   var Score = 0;
