@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,8 +54,9 @@
       margin-bottom: 20px;
       border-radius: 5px;
     }
-  </style> 
+  </style>
 </head>
+
 <body>
   <button type="button" onclick="reset()">Reset</button>
   <div id="guessAngle"></div>
@@ -62,13 +64,6 @@
   <canvas id="canvas" width="600" height="600" />
 </body>
 <script>
-  window.onload = function() {
-    // Get the height of the content inside the iframe
-    var contentHeight = document.body.scrollHeight;
-    
-    // Set the height of the iframe to match the content height
-    parent.document.getElementById('angleGameContainer').style.height = contentHeight + 'px';
-};
   var Answer = Math.floor(Math.random() * 360);
   var AngleGuessed = 0;
   var Score = 0;
@@ -83,9 +78,7 @@
     h = canvas.height,
     radius = 0.3;
   ctx.textAlign = 'center';
-  //canvas.onmousemove = canvas.onclick = e => {
   canvas.onmousemove = canvas.ontouchstart = canvas.ontouchmove = e => {
-    // offset mouse values so they are relative to the center of our canvas
     draw(as(e.offsetX), as(e.offsetY));
   }
   canvas.onclick = canvas.ontouchend = e => {
@@ -103,17 +96,6 @@
       document.getElementById("Answer").innerHTML = "Final Mean Average Error " + (parseInt(Score) / NumberOfAttempts) + "°";
     }
   }
-  /*
-  canvas.ddEventListener = canvas.onclick = e => {
-    // offset mouse values so they are relative to the center of our canvas
-    draw(as(e.offsetX), as(e.offsetY));
-  }
-  */
-  /*
-  canvas.addEventListener('click', function() {
-    ctx.fillText('45 deg', s(1) - 20, s(0) - 10);
-  }, false);
-  */
   draw(0, 0);
 
   function reset() {
@@ -141,7 +123,6 @@
       }
     }
     drawAngle(angle, x, y);
-    //writeAngle(angle);
   }
 
   function clear() {
@@ -157,7 +138,6 @@
     ctx.lineTo(s(0), s(0));
     ctx.strokeStyle = ctx.fillStyle = '#2e404f';
     ctx.stroke();
-    // positive X axis
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(s(0), s(0));
@@ -197,7 +177,6 @@
     ctx.fillStyle = 'red';
     ctx.fill();
     ctx.font = '12px/1 sans-serif';
-    //ctx.fillText(`x: ${x.toFixed(2)} y: ${y.toFixed(2)}`, s(x), s(y) - 15);
   }
 
   function drawLineToPoint(x, y) {
@@ -214,9 +193,9 @@
     ctx.beginPath();
     ctx.moveTo(s(radius), s(0));
     ctx.arc(s(0), s(0), radius * w / 2,
-      0, // 'arc' method also starts from positive X axis (3 o'clock)
+      0,
       angle,
-      true // Math.atan2 returns the anti-clockwise angle
+      true
     );
     ctx.strokeStyle = ctx.fillStyle = 'blue';
     ctx.stroke();
@@ -228,19 +207,16 @@
       angle = 360 - angle * 180 / Math.PI;
     }
     AngleGuessed = angle.toFixed(0);
-    //Display angle
-    //ctx.fillText(angle.toFixed(0), s(0.5*Math.cos(Math.abs(Math.abs(angleTemp)/2))), s(0.5*Math.sin(angleTemp/2)));
   }
-  // below methods will add the w / 2 offset
-  // because canvas coords set 0, 0 at top-left corner
-  // converts from [-1 ~ 1] to px
+
   function s(value) {
     return value * w / 2 + (w / 2);
   }
-  // converts from px to [-1 ~ 1]
+
   function as(value) {
     return (value - w / 2) / (w / 2);
   }
 </script>
 </body>
+
 </html>
