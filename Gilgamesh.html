@@ -45,7 +45,7 @@
       background-position: center;
       background-repeat: no-repeat;
       opacity: 0;
-      transition: opacity 2.5s;
+      transition: opacity 3.5s;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -63,16 +63,16 @@
       left: 20px;
       color: black;
       font-size: 25px;
-      font-family: Courier, monospace;
-      opacity: 0;
-      transition: opacity 1s ease;
+      font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
       padding: 0 100px;
-      line-height: 1;
+      line-height: 1.3;
+      letter-spacing: 2px;
     }
 
     .mole {
-      background-color: black;
-      padding: 20px;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(120, 120, 120, 0.48), black);
+      padding: 10px;
       border-radius: 10px;
       position: absolute;
       bottom: 20px;
@@ -80,10 +80,26 @@
       transform: translateX(-50%);
       color: white;
       font-size: 18px;
-      font-family: Tahoma, Geneva, sans-serif;
-      text-align: left;
-      opacity: 0.6;
-      line-height: 2;
+      font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .pozole {
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.25), rgba(120, 120, 120, 0));
+      letter-spacing: 3px;
+      padding: px;
+      border-radius: 0px;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: orange;
+      font-size: 30px;
+      font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
+      text-align: center;
+      line-height: 1.5;
     }
 
     .gallery .slide.active .content {
@@ -116,11 +132,10 @@
 <body>
   <div class="gallery">
     <div class="slide active" style="background-image: url(https://github.com/MrZeusRuiz/ZeusTheStudent/blob/main/COVER.png?raw=true);">
-      <div class="content">
-        <br>
+      <div class="pozole">
         <p><b><strong>A Bridge Across Time and Culture:</strong></b> In exploring the enduring legacy of "The Epic of Gilgamesh" from ancient Mesopotamia, my aim is to investigate its potential influence on subsequent works in Greek, Christian, and contemporary literature.
         <div style="color:white; font-size: 16px;">
-          <br>  Zeus ⚡| Hist 104 | Katie Manbachi | 03.13.2024
+          <br> Zeus ⚡| Hist 104 | Katie Manbachi | 03.13.2024
         </div>
       </div>
     </div>
@@ -142,7 +157,7 @@
 
     <div class="slide" style="background-image: url(https://media.britishmuseum.org/media/Repository/Documents/2014_10/14_11/2135aaa0_6552_4e13_87f6_a3c400c200f9/mid_00851340_001.jpg);">
       <div class="mole">
-        <span style="font-size: 24pt; color: orange"><strong>Neo-Assyrian Clay Tablet Fragments 6</strong></span>
+        <span style="font-size: 24pt; color: turquoise"><strong>Neo-Assyrian Clay Tablet Fragments 6</strong></span>
         <p><strong>Date:</strong> 7th Century BC<br> <strong>Excavated/Findspot:</strong> Kouyunjik, Asia: Middle East: Iraq: Iraq, North: Kouyunjik<br><strong>Material:</strong> Clay
       </div>
     </div>
