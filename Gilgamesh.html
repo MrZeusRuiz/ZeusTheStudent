@@ -32,6 +32,7 @@
     .gallery {
       position: relative;
       height: 100vh;
+      width: 100vw;
       overflow: hidden;
     }
 
@@ -39,8 +40,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      height: 100%;
-      width: 100%;
+      height: 100vh;
+      width: 100vw;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -57,12 +58,15 @@
     }
 
     .content {
+      width: auto;
+      max-width: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
       text-align: left;
       position: relative;
       top: 80px;
-      left: 20px;
+      left: 0%;
       color: black;
-      font-size: 25px;
+      font-size: 1.4vw;
       font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
       padding: 0 100px;
       line-height: 1.3;
@@ -70,33 +74,51 @@
     }
 
     .mole {
-      width: 100%;
-      background: linear-gradient(to bottom, rgba(120, 120, 120, 0.48), black);
+      width: 100vw;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, .79), grey);
       padding: 10px;
       border-radius: 10px;
       position: absolute;
-      bottom: 20px;
+      bottom: 0%;
       left: 50%;
       transform: translateX(-50%);
-      color: white;
-      font-size: 18px;
+      color: black;
+      font-size: 1vw;
+      font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
+      text-align: center;
+      line-height: 2;
+    }
+
+    .asada {
+      width: 100vw;
+      letter-spacing: 3px;
+      padding: 1px;
+      border-radius: 0px;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: orange;
+      font-size: 7vw;
       font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
       text-align: center;
       line-height: 1.5;
     }
 
     .pozole {
-      width: 100%;
+      width: auto;
+      max-width: 100vw;
       background: linear-gradient(to bottom, rgba(10, 10, 10, 0.25), rgba(120, 120, 120, 0));
       letter-spacing: 3px;
-      padding: px;
+      padding: 12px;
       border-radius: 0px;
       position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 1%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
       color: orange;
-      font-size: 30px;
+      font-size: 1.7vw;
       font-family: "Garamond", "Hoefler Text", "Times New Roman", serif;
       text-align: center;
       line-height: 1.5;
@@ -114,7 +136,7 @@
       padding: 10px 20px;
       border-radius: 20%;
       border: none;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 146, 0, 1);
       color: black;
       cursor: pointer;
     }
@@ -131,7 +153,9 @@
 
 <body>
   <div class="gallery">
-    <div class="slide active" style="background-image: url(https://github.com/MrZeusRuiz/ZeusTheStudent/blob/main/COVER.png?raw=true);">
+    <div class="slide active" style="background-image: url(https://res.cloudinary.com/dgpllhqjn/image/upload/v1710486353/COVER.png_uwdzvf.png);">
+      <div class="asada"><strong>The Epic Of Gilgamesh</strong>
+      </div>
       <div class="pozole">
         <p><b><strong>A Bridge Across Time and Culture:</strong></b> In exploring the enduring legacy of "The Epic of Gilgamesh" from ancient Mesopotamia, my aim is to investigate its potential influence on subsequent works in Greek, Christian, and contemporary literature.
         <div style="color:white; font-size: 16px;">
@@ -140,7 +164,7 @@
       </div>
     </div>
 
-    <div class="slide" style="background-image: url(https://mcdn.wallpapersafari.com/medium/5/99/inFhyk.jpg);">
+    <div class="slide" style="background-image: url(https://res.cloudinary.com/dgpllhqjn/image/upload/v1710492339/FLOODTABLETS_v7poxp.png);">
       <div class="content" style="color: black;">
         <p> <strong>The Epic Of Gilgamesh | Clay Tablet</strong>
           <br> <i>Excavated by: Sir Austen Henry Layard (et al)</i>
@@ -155,11 +179,33 @@
       </div>
     </div>
 
-    <div class="slide" style="background-image: url(https://media.britishmuseum.org/media/Repository/Documents/2014_10/14_11/2135aaa0_6552_4e13_87f6_a3c400c200f9/mid_00851340_001.jpg);">
+    <div class="slide" style="background-image: url(https://res.cloudinary.com/dgpllhqjn/image/upload/v1710492339/FLOODTABLETS_v7poxp.png);">
       <div class="mole">
-        <span style="font-size: 24pt; color: turquoise"><strong>Neo-Assyrian Clay Tablet Fragments 6</strong></span>
+        <span style="font-size: 2.5vw; color: black"><strong>The Flood Tablet</strong></span>
         <p><strong>Date:</strong> 7th Century BC<br> <strong>Excavated/Findspot:</strong> Kouyunjik, Asia: Middle East: Iraq: Iraq, North: Kouyunjik<br><strong>Material:</strong> Clay
       </div>
+
+    </div>
+    <div class="slide" style="background-image: url(https://res.cloudinary.com/dgpllhqjn/image/upload/v1710492633/Seal_j7o2v6.png);">
+      <div class="content" style="color: black;">
+        <p> <strong>The Epic Of Gilgamesh | Clay Tablet</strong>
+          <br> <i>Excavated by: Sir Austen Henry Layard (et al)</i>
+          <br>
+          <br>
+          <br>
+          <br>The first cuneiform tablet of the Epic of Gilgamesh: A story that can draw parallels to Greek, Christianity, and contemporary literature was found by Sir Austen Henry Layard and his assistant Hormuzd Rassam.  In this particular fragment, the goddess Ishtar expresses her more than platonic interest in Gilgamesh. However, Gilgamesh rejects her advances. In retribution, Ishtar asks for retribution from her dad Anu. This trope can later be seen reflected in the Greek stories of Athena, medusa, and other Greek personalities.
+        </p>
+        <p> If literary merit was enough, the Epic of Gilgamesh would fare well reliant only on its prose. However, its significance transcends literary boundaries and extends to its geographical impact. The British Museum underscores this significance by highlighting, "The popularity of the story is proven by the fact that fragments have been found as far afield as Hattusas in Turkey, Emar in Syria, and Megiddo in Israel" (British Museum CITATION). This acknowledgment underscores the widespread influence and enduring legacy of the epic beyond its Mesopotamian origins. </p> <strong>Further Exploration</strong>
+        <p> <a href="https://www.britishmuseum.org/collection/object/W_K-231" class="styled-button">Explore The British Museum</a>
+
+      </div>
+    </div>
+    <div class="slide" style="background-image: url(https://res.cloudinary.com/dgpllhqjn/image/upload/v1710492633/Seal_j7o2v6.png);">
+      <div class="mole">
+        <span style="font-size: 2vw; color: black"><strong>Seal</strong></span>
+        <p><strong>Date:</strong> 7th Century BC<br> <strong>Excavated/Findspot:</strong> Kouyunjik, Asia: Middle East: Iraq: Iraq, North: Kouyunjik<br><strong>Material:</strong> Clay
+      </div>
+
     </div>
 
   </div>
