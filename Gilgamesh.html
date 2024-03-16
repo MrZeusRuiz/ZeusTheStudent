@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>THE EPIC OF GILGAMESH</title>
   <link rel="shortcut icon" href="⚡" type="image/x-icon">
+
   <style>
     .loading-screen {
       position: fixed;
@@ -17,6 +18,18 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      animation: pulse 1s infinite alternate;
+      /* Add animation */
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(1.1);
+      }
     }
 
     body {
